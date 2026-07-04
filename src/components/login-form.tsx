@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import { useState } from "react";
-import { Loader2 } from "lucide-react";
+import { Loader2, Sparkles } from "lucide-react";
 import { Label } from "@/components/ui/label";
 
 export function LoginForm({ className, ...props }: React.ComponentProps<"div">) {
@@ -14,6 +14,12 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleFillDemo = () => {
+    setEmail("admin@admin.com");
+    setPassword("admin");
+    toast.success("Kredensial demo diisi otomatis!");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,27 +127,45 @@ export function LoginForm({ className, ...props }: React.ComponentProps<"div">) 
           </CardTitle>
           <CardDescription className="text-xs text-ink-soft mt-1">
             {mode === "login" ? (
-              <span className="block space-y-2">
+              <span className="block space-y-3">
                 <span className="block">
                   Gunakan email & password Anda atau login dengan akun Google.
                 </span>
-                <span className="block p-2 bg-slate-50 border border-slate-200/60 rounded-xl text-left">
-                  <span className="block text-[9px] font-mono text-slate-400 font-bold uppercase tracking-wider mb-0.5">
-                    Demo Admin Account
-                  </span>
-                  <span className="block text-[11px] text-slate-600 font-sans">
-                    Email:{" "}
-                    <span className="font-mono text-primary font-semibold select-all">
-                      admin@admin.com
+                <button
+                  type="button"
+                  onClick={handleFillDemo}
+                  className="w-full text-left p-3 bg-amber-50 hover:bg-amber-100/50 border border-amber-200 rounded-xl transition-all duration-200 cursor-pointer shadow-sm group relative overflow-hidden block"
+                >
+                  <div className="absolute right-2 top-2 text-amber-500/10 group-hover:text-amber-500/20 transition-colors">
+                    <Sparkles className="h-10 w-10 rotate-12" />
+                  </div>
+                  <span className="flex items-center gap-1.5 mb-1.5">
+                    <span className="text-[10px] font-mono text-amber-800 font-bold uppercase tracking-wider flex items-center gap-1">
+                      <Sparkles className="h-3.5 w-3.5 text-amber-600 animate-pulse" />
+                      Akun Demo Admin
+                    </span>
+                    <span className="text-[9px] text-amber-700 bg-amber-200/60 px-1.5 py-0.5 rounded-full font-semibold">
+                      Isi Otomatis
                     </span>
                   </span>
-                  <span className="block text-[11px] text-slate-600 font-sans">
-                    Password:{" "}
-                    <span className="font-mono text-primary font-semibold select-all">
-                      admin123
+                  <span className="block text-xs text-amber-950 font-sans space-y-0.5 font-medium">
+                    <span className="block">
+                      Email:{" "}
+                      <span className="font-mono text-amber-900 font-bold select-all bg-amber-200/30 px-1 py-0.2 rounded">
+                        admin@admin.com
+                      </span>
+                    </span>
+                    <span className="block">
+                      Password:{" "}
+                      <span className="font-mono text-amber-900 font-bold select-all bg-amber-200/30 px-1 py-0.2 rounded">
+                        admin
+                      </span>
                     </span>
                   </span>
-                </span>
+                  <span className="block mt-1 text-[9px] text-amber-700 font-sans font-normal italic">
+                    * Klik di sini untuk mengisi formulir login otomatis
+                  </span>
+                </button>
               </span>
             ) : (
               "Lengkapi form berikut untuk memulai perjalanan Anda di Invitaku."

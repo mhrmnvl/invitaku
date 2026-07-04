@@ -11,7 +11,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { checkSessionFn } from "@/lib/auth-rpc";
 
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -210,8 +210,10 @@ function DashboardLayout() {
         <div className="flex flex-col h-screen w-full bg-sidebar text-ink font-sans overflow-hidden">
           {/* GitLab-style Sticky Top Header */}
           <header className="sticky top-0 z-50 flex h-10 w-full items-center justify-between bg-sidebar px-6 shrink-0 border-b border-rule/30">
-            {/* Left: Brand logo */}
-            <div className="flex items-center gap-4">
+            {/* Left: Mobile sidebar trigger + Brand logo */}
+            <div className="flex items-center gap-2">
+              {/* Mobile-only hamburger to open sidebar Sheet */}
+              <SidebarTrigger className="md:hidden text-ink-soft hover:text-ink -ml-1" />
               <Link to="/dashboard" className="flex items-center">
                 <img src="/logo.png" alt="Invitaku" className="h-16 w-auto object-contain -my-3" />
               </Link>
